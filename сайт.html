@@ -1,0 +1,168 @@
++<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dress Code — магазин одежды</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fas fa-crown"></i>
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <span class="logo-text">Dress<span>Code</span></span>
+            </div>
+            <div class="search-area">
+                <input type="text" placeholder="Найти товары..." id="searchInput">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <button class="icon-btn filter-trigger" id="filterTriggerBtn">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
+                <button class="icon-btn" id="favoritesBtn">
+                    <i class="far fa-heart"></i>
+                    <span class="badge" id="favCount">0</span>
+                </button>
+                <button class="icon-btn" id="cartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Категории -->
+    <div class="categories-nav">
+        <div class="container categories-list">
+            <span data-cat="all" class="cat-active">Все товары</span>
+            <span data-cat="dresses">Платья</span>
+            <span data-cat="tops">Топы и блузы</span>
+            <span data-cat="outerwear">Верхняя одежда</span>
+            <span data-cat="pants">Брюки и джинсы</span>
+            <span data-cat="skirts">Юбки</span>
+            <span data-cat="shirts">Рубашки</span>
+            <span data-cat="suits">Костюмы</span>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <div class="container main-container">
+            <div class="catalog-section">
+                <div class="catalog-header">
+                    <h2>Каталог</h2>
+                    <span id="resultsCount">42 товара</span>
+                </div>
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Выезжающая панель фильтров -->
+    <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-header">
+            <h3><i class="fas fa-sliders-h"></i> Фильтры</h3>
+            <button class="close-filter" id="closeFilterPanel"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="filter-panel-content">
+            <div class="filter-group">
+                <h4>Цена, ₽</h4>
+                <div class="price-range">
+                    <input type="number" id="minPrice" placeholder="от" value="0">
+                    <span>—</span>
+                    <input type="number" id="maxPrice" placeholder="до" value="50000">
+                </div>
+            </div>
+            <div class="filter-group">
+                <h4>Размер</h4>
+                <div class="size-group">
+                    <label><input type="checkbox" value="XS"> XS</label>
+                    <label><input type="checkbox" value="S"> S</label>
+                    <label><input type="checkbox" value="M"> M</label>
+                    <label><input type="checkbox" value="L"> L</label>
+                    <label><input type="checkbox" value="XL"> XL</label>
+                    <label><input type="checkbox" value="XXL"> XXL</label>
+                </div>
+            </div>
+            <div class="filter-group">
+                <h4>Цвет</h4>
+                <div class="color-group">
+                    <label><input type="checkbox" value="чёрный">  чёрный</label>
+                    <label><input type="checkbox" value="белый">  белый</label>
+                    <label><input type="checkbox" value="красный">  красный</label>
+                    <label><input type="checkbox" value="синий">  синий</label>
+                    <label><input type="checkbox" value="бежевый"> бежевый</label>
+                    <label><input type="checkbox" value="зелёный">  зелёный</label>
+                    <label><input type="checkbox" value="серый">  серый</label>
+                    
+                </div>
+            </div>
+            <button id="resetFiltersBtn" class="reset-btn">Сбросить все фильтры</button>
+        </div>
+    </div>
+
+    <!-- Боковая панель корзины -->
+    <div class="side-panel" id="cartPanel">
+        <div class="panel-head">
+            <h3>Корзина <i class="fas fa-shopping-bag"></i></h3>
+            <button class="close-panel" id="closeCartPanel"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-list" id="cartItemsList"></div>
+        <div class="cart-total-block" id="cartTotalBlock">
+            <div class="total-price">Итого: <span id="cartTotal">0</span> ₽</div>
+            <div class="payment-methods">
+    <p style="font-weight: 600; margin-bottom: 10px;">Способ оплаты:</p>
+    <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+        <input type="radio" name="payment" value="online" checked>  Оплатить сразу 
+    </label>
+    <label style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+        <input type="radio" name="payment" value="cod">  При получении 
+</div>
+            <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Боковая панель избранного -->
+    <div class="side-panel" id="favoritesPanel">
+        <div class="panel-head">
+            <h3>Избранное <i class="fas fa-heart"></i></h3>
+            <button class="close-panel" id="closeFavPanel"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="fav-list" id="favItemsList"></div>
+    </div>
+
+    <!-- Затемнение -->
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+    <div class="developer-info-block">
+    <div class="container dev-container">
+        <div class="dev-content">
+            <div class="dev-photo">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="dev-details">
+                <h3>Тавкиева Махлиё</h3>
+                <p>Создатель Dress Code</p>
+                <div class="dev-contacts">
+                    <a href="tel:+79965642796"><i class="fas fa-phone-alt"></i> +7 (996)5642796</a>
+                    <a href="mailto:mahish9808@mail.ru"><i class="fas fa-envelope"></i> mahish9808@mail.ru</a>
+                </div>
+                <div class="dev-copyright">
+                    <p>© 2026 Dress Code.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
